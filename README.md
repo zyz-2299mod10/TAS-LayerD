@@ -44,6 +44,17 @@ Each sample includes:
 - Ground Truth generation uses `src/utils/crello_utils.py`
 
 ---
+# TAS-LayerD
+Decomposing graphic design images is challenging due to complex occlusions and diverse text elements. We present a LayerD-based pipeline that integrates EasyOCR and Hi-SAM for precise text segmentation. By applying adaptive dilation and instance-level layer splitting, our method robustly separates text, objects, and backgrounds while preserving high visual coherence.
+<img width="765" height="565" alt="image" src="https://github.com/user-attachments/assets/fda6b714-65af-4682-946b-a17330ace838" />
+
+## Result demonstration
+<img width="793" height="349" alt="image" src="https://github.com/user-attachments/assets/d504fb7e-4896-49b7-b4a4-6f282f6f6e4d" />
+
+
+## Experiments & Ablation
+<img width="699" height="608" alt="image" src="https://github.com/user-attachments/assets/d7003a0c-d41b-4936-b62a-e01a263bcdac" />
+
 
 ## 🚀 Usage
 
@@ -114,24 +125,3 @@ accelerate launch ./train.py \
 ```
 We fine-tune the pretrained **ZhengPeng7/BiRefNet** model on our dataset. We train the model for **10 epochs** in total.
 
----
-## 🚫 Rules & Restrictions
-
-Violations result in **0 score**.
-
-- No recovering ground truth layer metadata  
-- No external data  
-- No paid/closed-source API models (GPT‑4o, Claude, Midjourney, etc.)  
-- Must be fully reproducible  
-
----
-
-# Submission Rules
-### Deadline
-114/12/22 (Mon.) 23:59 (GMT+8)
-    
-# Q&A
-If you have any problems related to Final Project, you may
-- Use TA hours
-- Contact TAs by e-mail ([ntu-dlcv-2025-fall-ta@googlegroups.com](mailto:ntu-dlcv-2025-fall-ta@googlegroups.com))
-- Post your question under Final Project FAQ section in NTU Cool Discussion
