@@ -166,3 +166,6 @@ ignored/
 *.whl
 .pre-commit-config.yaml
 .vscode
+
+data/
+output/

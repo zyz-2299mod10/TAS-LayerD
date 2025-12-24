@@ -72,24 +72,47 @@ This will download the checkpoints to `hi_sam/pretrained_checkpoint/efficient_hi
 **Inference**
 ```bash
 python ./infer.py \
-    --input <input folder> \
-    --output-dir <output dir> \
+    --input <input-folder> \
+    --output-dir <output-folder> \
     --matting-weight-path ./src/layerd/weight/matting_model.pth \
     --extract-text \
     --device cuda
 ```
+* `--input` : folder that contains input images (.png, .jpg)
+* `--matting-weight-path`: matting model weight path
+* `--extract-text`: use our text extraction method
 
 ### Training
 #### data preprocessing
 ```bash
-python ./data_preprocess.py --output-dir <output folder> --split train --save-layers --inpainting
+# generate training data
+python ./data_preprocess.py \
+    --output-dir <output-folder> \
+    --split train \
+    --save-layers
 ```
-This may cost 20~25 hours
+This will automatically download the whole training dataset. It may cost 20~25 hours for processing all images
+
+```bash
+# split the training data to validation
+python ./split_val.py \
+    --data-root <output-folder> \
+    --val-ratio 0.1
+```
+* `--data-root`: Processed dataset 
+* Split 10% of the training data to validation
 
 #### Train
 ```bash
-
+accelerate launch ./train.py \
+  config_path=./src/layerd/configs/train.yaml \
+  data_root=<input-training-data> \
+  out_dir=<output-checkpoint-folder> \
+  device=cuda \
+  use_accelerate=true \
+  mixed_precision=bf16
 ```
+We fine-tune the pretrained **ZhengPeng7/BiRefNet** model on our dataset. We train the model for **10 epochs** in total.
 
 ---
 ## 🚫 Rules & Restrictions

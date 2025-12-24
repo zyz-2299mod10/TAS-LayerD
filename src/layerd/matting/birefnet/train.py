@@ -206,7 +206,7 @@ def train(cfg: Any) -> None:
         is_main_process = int(os.environ["LOCAL_RANK"]) == 0
     else:
         device = torch.device(cfg.device) if isinstance(cfg.device, str) else cfg.device
-        is_main_process = int(os.environ["LOCAL_RANK"]) == 0 if cfg.use_accelerate else True
+        is_main_process = int(os.environ.get("LOCAL_RANK", "0")) == 0
     if is_main_process:
         cfg_dict = cast(dict[str, Any], OmegaConf.to_container(cfg, resolve=True))
         os.makedirs(cfg.out_dir, exist_ok=True)
@@ -307,7 +307,7 @@ def train(cfg: Any) -> None:
                 save_all_states(model, optimizer, scheduler, cfg.out_dir, f"epoch_{epoch:03}")
             save_all_states(model, optimizer, scheduler, cfg.out_dir, "last")
 
-        if cfg.use_accelerate or distributed:
+        if distributed:
             torch.distributed.barrier()
 
     if distributed:

@@ -4,7 +4,7 @@ defaults:
 
 out_dir: ??? # OmegaConf mandatory field: must be specified at runtime (see: https://omegaconf.readthedocs.io/en/2.1_branch/usage.html#mandatory-values)
 data_root: ??? # OmegaConf mandatory field: must be specified at runtime
-epochs: 35
+epochs: 10
 finetune_last_epochs: -20
 is_matting: false
 valid_step: 1
@@ -17,8 +17,8 @@ gradient_accumulation_steps: 1 # only works when use_accelerate is true
 compile: null # default, reduce-overhead, and max-autotune are supported
 dist: false
 device: cpu
-batch_size: 4
-save_step: 5
+batch_size: 2
+save_step: 2
 
 optimizer:
   name: AdamW
