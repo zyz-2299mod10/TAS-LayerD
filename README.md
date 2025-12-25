@@ -90,7 +90,7 @@ python ./infer.py \
     --device cuda
 ```
 * `--input` : folder that contains input images (.png, .jpg)
-* `--matting-weight-path`: matting model weight path
+* `--matting-weight-path`: matting model weight path. Or you can use original LayerD weight by ignore this hyperparameter
 * `--extract-text`: use our text extraction method
 
 ### Training
